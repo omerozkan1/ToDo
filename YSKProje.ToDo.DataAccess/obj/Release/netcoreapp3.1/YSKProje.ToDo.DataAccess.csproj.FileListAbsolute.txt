@@ -1,0 +1,15 @@
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\bin\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.deps.json
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\bin\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.runtimeconfig.json
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\bin\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.runtimeconfig.dev.json
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\bin\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.dll
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\bin\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.pdb
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\bin\Release\netcoreapp3.1\YSKProje.ToDo.Entities.dll
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\bin\Release\netcoreapp3.1\YSKProje.ToDo.Entities.pdb
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.csprojAssemblyReference.cache
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.AssemblyInfoInputs.cache
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.AssemblyInfo.cs
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.csproj.CopyComplete
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.dll
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.pdb
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.DataAccess\obj\Release\netcoreapp3.1\YSKProje.ToDo.DataAccess.genruntimeconfig.cache

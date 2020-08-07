@@ -1,0 +1,9 @@
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\bin\Release\netcoreapp3.1\YSKProje.ToDo.Entities.deps.json
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\bin\Release\netcoreapp3.1\YSKProje.ToDo.Entities.dll
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\bin\Release\netcoreapp3.1\YSKProje.ToDo.Entities.pdb
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\obj\Release\netcoreapp3.1\YSKProje.ToDo.Entities.csprojAssemblyReference.cache
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\obj\Release\netcoreapp3.1\YSKProje.ToDo.Entities.AssemblyInfoInputs.cache
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\obj\Release\netcoreapp3.1\YSKProje.ToDo.Entities.AssemblyInfo.cs
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\obj\Release\netcoreapp3.1\YSKProje.ToDo.Entities.dll
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\obj\Release\netcoreapp3.1\YSKProje.ToDo.Entities.pdb
+C:\Users\yskah\Desktop\UdemyToDo\YSKProje.ToDo.Entities\obj\Release\netcoreapp3.1\YSKProje.ToDo.Entities.csproj.CoreCompileInputs.cache
