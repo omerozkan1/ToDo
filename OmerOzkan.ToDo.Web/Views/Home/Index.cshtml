@@ -1,8 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <span>@User.Identity.Name</span>
+    if (User.IsInRole("Admin"))
+    {
+        <div class="">
+            Admin İçeriği
+        </div>
+    }
+    <a asp-action="Logout" asp-controller="Account" class="btn btn-danger">Logout</a>
+}
+else
+{
+    //<a asp-controller="Account" asp-action="SignUp"  class="btn btn-success">Kayıt Ol</a>
+    <a asp-controller="Account" asp-action="Login"  class="btn btn-primary">Giriş Yap</a>
+}

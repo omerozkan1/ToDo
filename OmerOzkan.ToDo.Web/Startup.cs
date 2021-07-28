@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OmerOzkan.ToDo.Business.Containers.MicrosoftIoC;
+using OmerOzkan.ToDo.DataAccess.Concrete.EfCore.Context;
+using OmerOzkan.ToDo.Entities.Domains;
+using OmerOzkan.ToDo.Web.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web
 {
@@ -22,7 +25,28 @@ namespace OmerOzkan.ToDo.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDependencies();
+            services.AddDbContext<ToDoContext>(options =>
+            {
+                options.UseSqlServer("Server=DESKTOP-9TOE094;Database=ToDoDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+            });
+
+            services.AddIdentity<AppUser, AppRole>(opt =>
+            {
+                //opt.User.AllowedUserNameCharacters = "weqtyýuoðüsadgfhkjlþizxcvbnmööç";
+                opt.User.RequireUniqueEmail = true;
+
+                opt.Password.RequiredLength = 7;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireDigit = false;
+            })
+         .AddEntityFrameworkStores<ToDoContext>()
+         .AddDefaultTokenProviders();
+
             services.AddControllersWithViews();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,10 +60,10 @@ namespace OmerOzkan.ToDo.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

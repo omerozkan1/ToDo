@@ -4,4 +4,17 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OmerOzkan.ToDo.DataAccess\OmerOzkan.ToDo.DataAccess.csproj" />
+    <ProjectReference Include="..\OmerOzkan.ToDo.Dto\OmerOzkan.ToDo.Dto.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ValidationRules\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog.Config" Version="4.7.10" />
+  </ItemGroup>
+
 </Project>

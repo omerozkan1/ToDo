@@ -1,37 +1,57 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OmerOzkan.ToDo.Web.Models;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OmerOzkan.ToDo.Business.Interfaces;
+using OmerOzkan.ToDo.Dto.Dtos.AppUserDtos;
+using OmerOzkan.ToDo.Entities.Domains;
+using OmerOzkan.ToDo.Web.BaseControllers;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private UserManager<AppUser> _userManager;
+        private SignInManager<AppUser> _signInManager;
+        private readonly ICustomLogger _customLogger;
+  
+        public HomeController(ICustomLogger customLogger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
-            _logger = logger;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _customLogger = customLogger;        
         }
 
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+    
+        public IActionResult StatusCode(int? code)
         {
+            if (code == 404)
+            {
+                ViewBag.Code = code;
+                ViewBag.Message = "Sayfa bulunamadı";
+            }
+
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var exceptionHandler = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            _customLogger.LogError($"Hatanın oluştuğu yer: {exceptionHandler.Path}\n Hatanın mesajı: {exceptionHandler.Error.Message}\n Stack Trace : {exceptionHandler.Error.StackTrace}");
+
+            ViewBag.Path = exceptionHandler.Path;
+            ViewBag.Message = exceptionHandler.Error.Message;
+            return View();
+        }
+
+        public void Hata()
+        {
+            throw new Exception("Hata");
         }
     }
 }
