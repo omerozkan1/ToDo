@@ -9,10 +9,7 @@ namespace OmerOzkan.ToDo.DataAccess.Concrete.Mapping
         public void Configure(EntityTypeBuilder<Duty> builder)
         {
             builder.HasKey(I => I.Id);
-
-
             builder.Property(I => I.Name).HasMaxLength(200);
-
 
             builder.HasOne(I => I.Urgency).WithMany(I => I.Duties).HasForeignKey(I => I.UrgencyId);
         }

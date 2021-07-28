@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private UserManager<AppUser> userManager;
@@ -18,7 +18,7 @@ namespace OmerOzkan.ToDo.Web.Controllers
             this.signInManager = signInManager;
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -26,13 +26,13 @@ namespace OmerOzkan.ToDo.Web.Controllers
         }
 
         [HttpPost]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(AppUserLoginDto model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(model.UserName);
+                var user = await userManager.FindByEmailAsync(model.Email);
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();

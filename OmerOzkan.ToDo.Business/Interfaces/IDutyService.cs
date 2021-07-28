@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace OmerOzkan.ToDo.DataAccess.Interfaces
+namespace OmerOzkan.ToDo.Business.Interfaces
 {
-    public interface IDutyDal : IGenericDal<Duty>
+    public interface IDutyService : IGenericService<Duty>
     {
         List<Duty> GetByIncompleteWithUrgency();
         List<Duty> GetAll();

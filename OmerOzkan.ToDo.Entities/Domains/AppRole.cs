@@ -2,7 +2,7 @@
 
 namespace OmerOzkan.ToDo.Entities.Domains
 {
-    public class AppRole : IdentityRole
+    public class AppRole : IdentityRole<int>
     {
     }
 }

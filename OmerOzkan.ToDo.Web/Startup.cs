@@ -8,8 +8,6 @@ using Microsoft.Extensions.Hosting;
 using OmerOzkan.ToDo.Business.Containers.MicrosoftIoC;
 using OmerOzkan.ToDo.DataAccess.Concrete.EfCore.Context;
 using OmerOzkan.ToDo.Entities.Domains;
-using OmerOzkan.ToDo.Web.Identity;
-using System;
 
 namespace OmerOzkan.ToDo.Web
 {

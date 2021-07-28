@@ -16,8 +16,8 @@ namespace OmerOzkan.ToDo.DataAccess.Concrete.Mapping
             builder.Property(I => I.Name).HasMaxLength(100);
             builder.Property(I => I.SurName).HasMaxLength(100);
 
-            builder.HasMany(I => I.Duties).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId);
-            builder.HasMany(I => I.Notifications).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId);
+            //builder.HasMany(I => I.Duties).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId);
+            //builder.HasMany(I => I.Notifications).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OmerOzkan.ToDo.Entities.Domains
 {
-    public class AppUser : IdentityUser
+    public class AppUser : IdentityUser<int>
     {
         public string Name { get; set; }
         public string SurName { get; set; }

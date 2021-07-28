@@ -2,11 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OmerOzkan.ToDo.Business.Interfaces;
-using OmerOzkan.ToDo.Dto.Dtos.AppUserDtos;
 using OmerOzkan.ToDo.Entities.Domains;
-using OmerOzkan.ToDo.Web.BaseControllers;
 using System;
-using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web.Controllers
 {

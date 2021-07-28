@@ -4,9 +4,11 @@ namespace OmerOzkan.ToDo.Dto.Dtos.AppUserDtos
 {
     public class AppUserLoginDto
     {
-        [Required(ErrorMessage = "Kullanıcı adı boş geçilemez.")]
-        [Display(Name = "Kullanıcı Adınız: ")]
-        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Email boş geçilemez.")]
+        [Display(Name = "Emailiniz: ")]
+        [EmailAddress(ErrorMessage = "Lütfen email bilginizi kontrol ediniz.")]
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Parola boş geçilemez.")]
         [Display(Name = "Parolanız: ")]
