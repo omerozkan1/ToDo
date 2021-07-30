@@ -1,0 +1,69 @@
+﻿@model AssignStaffListDto
+@{
+    ViewData["Title"] = "AssignStaff";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row mt-2">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-center lead pt-2">Görev Bilgileri</h4>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title">@Model.Duty.Name</h5>
+                <p class="card-text">@Model.Duty.Description</p>
+                <p class="card-text">
+                    <strong>Aciliyet Durumu:</strong>
+                    <span class="badge badge-primary">
+                        @Model.Duty.Urgency.Description
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">Personel Bilgileri</h5>
+            </div>
+
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="~/img/@Model.AppUser.Picture" class="card-img" style="height:10rem!important" alt="@Model.AppUser.Name">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.AppUser.Name @Model.AppUser.SurName</h5>
+                        <p class="card-text">
+                            <getDutyByAppUserId app-user-id="@Model.AppUser.Id"></getDutyByAppUserId>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">@Model.AppUser.Email</small>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <form asp-action="AssignDuty" method="post">
+            <p class="lead">
+                Yukarıdaki göreve ilgili personel atanacaktır. Bu işlemi gerçekleştirmek istediğinize emin misiniz?
+            </p>
+            <div class="form-group text-center">
+                <a asp-action="AssignDuty" asp-route-id="@Model.Duty.Id" class="btn btn-primary"><i class="fas fa-chevron-circle-left mr-2"></i>Hayır Vazgeç</a>
+                <input type="hidden" name="StaffId" value="@Model.AppUser.Id" />
+                <input type="hidden" name="DutyId" value="@Model.Duty.Id" />
+                <button type="submit" class="btn btn-info"> <i class="fas fa-check mr-2"></i>Evet Görevlendir </button>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+

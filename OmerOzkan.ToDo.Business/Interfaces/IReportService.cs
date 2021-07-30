@@ -2,8 +2,8 @@
 
 namespace OmerOzkan.ToDo.Business.Interfaces
 {
-    public interface IReportService : IGenericService<Report>
-    {
+    public interface IReportService
+    { 
         Report GetByReportId(int id);
         int GetReportCountByAppUserId(string id);
         int GetReportCount();

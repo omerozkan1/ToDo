@@ -1,0 +1,41 @@
+﻿@model AppUserDto
+
+@{
+    string active = string.Empty;
+    if (TempData["Active"] != null)
+    {
+        active = TempData["Active"].ToString();
+    }
+}
+
+<div class="border border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">
+        <img src="~/img/@Model.Picture" alt="@Model.Name" style="height:10rem!important" class="w-100 img-thumbnail" />
+    </div>
+    <div class="list-group list-group-flush">
+
+        <a asp-action="Index" asp-controller="Home" class="list-group-item list-group-item-action @(active=="home"?"active":"")"><i class="fas fa-home mr-2"></i>AnaSayfa</a>
+
+        <a asp-action="Index" asp-controller="Duties" class="list-group-item list-group-item-action @(active=="duty"?"active":"") "><i class="fas fa-tasks mr-2"></i>Görev İşlemleri</a>
+
+        <a asp-action="Index" asp-controller="Urgencies" class="list-group-item list-group-item-action @(active=="urgency"?"active":"")"><i class="fas fa-exclamation mr-2"></i>Aciliyet İşlemleri</a>
+
+        <a asp-action="Index" asp-controller="WorkOrder" class="list-group-item list-group-item-action @(active=="workOrder"?"active":"")"><i class="far fa-file-alt mr-2"></i>İş Emirleri</a>
+
+        <a asp-action="Index" asp-controller="Notification" class="list-group-item list-group-item-action position-relative @(active=="notification"?"active":"")">
+            <i class="far fa-bell mr-2"></i>
+            @if (ViewBag.NotificationCount > 0)
+            {
+                <sub class="badge badge-info badge-pill position-absolute" style="bottom:0.625rem!important; left:1.7rem!important;">
+                    <small>@ViewBag.NotificationCount</small>
+                </sub>
+            }
+            Bildirimler
+        </a>
+
+        <a asp-action="Index" asp-controller="User" class="list-group-item list-group-item-action
+                   @(active=="profile"?"active":"")"><i class="fas fa-user mr-2"></i>Profilim</a>
+
+        <a asp-area="" asp-action="Logout" asp-controller="Home" class="list-group-item list-group-item-action "><i class="fas fa-sign-out-alt mr-2"></i>Çıkış Yap</a>
+    </div>
+</div>

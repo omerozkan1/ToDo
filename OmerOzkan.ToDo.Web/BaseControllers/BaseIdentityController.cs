@@ -13,7 +13,7 @@ namespace OmerOzkan.ToDo.Web.BaseControllers
         {
             _userManager = userManager;
         }
-        protected async Task<AppUser> GetLoginUser()
+        protected async Task<AppUser> GetLoggedUser()
         {
             return await _userManager.FindByNameAsync(User.Identity.Name);
         }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,8 @@ using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(RoleInfo.Admin)]
     public class UserController : BaseIdentityController
     {
         private readonly IMapper _mapper;
@@ -24,7 +27,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = TempdataInfo.Profile;
-            return View(_mapper.Map<AppUserDto>(await GetLoginUser()));
+            return View(_mapper.Map<AppUserDto>(await GetLoggedUser()));
         }
 
         [HttpPost]
@@ -35,16 +38,16 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
                 var updatedUser = _userManager.Users.FirstOrDefault(I => I.Id == Convert.ToInt32(model.Id));
                 if (image != null)
                 {
-                    string uzanti = Path.GetExtension(image.FileName);
-                    string resimAd = Guid.NewGuid() + uzanti;
-                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/" + resimAd);
+                    string extension = Path.GetExtension(image.FileName);
+                    string imageName = Guid.NewGuid() + extension;
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/" + imageName);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await image.CopyToAsync(stream);
                     }
 
-                    updatedUser.Picture = resimAd;
+                    updatedUser.Picture = imageName;
                 }
 
                 updatedUser.Name = model.Name;

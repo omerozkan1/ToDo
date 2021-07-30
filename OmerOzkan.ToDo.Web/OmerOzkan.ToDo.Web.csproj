@@ -21,9 +21,4 @@
     <ProjectReference Include="..\OmerOzkan.ToDo.Business\OmerOzkan.ToDo.Business.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Views\" />
-    <Folder Include="Areas\Member\Views\" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,43 @@
+﻿@model ReportAddDto
+@{
+    ViewData["Title"] = "AddReport";
+    Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card text-white bg-primary my-3">
+    <div class="card-header">
+        @Model.Duty.Name
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">  Aciliyet: @Model.Duty.Urgency.Description</h4>
+        <p class="card-text">@Model.Duty.Description</p>
+    </div>
+</div>
+
+<form method="post" asp-action="AddReport" class="p-3">
+
+
+    <input type="hidden" asp-for="@Model.DutyId" />
+    <div class="form-group">
+        <label asp-for="@Model.Description">Tanım :</label>
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        <input asp-for="@Model.Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Detail">Detay :</label>
+        <span asp-validation-for="@Model.Detail" class="text-danger"></span>
+        <textarea asp-for="@Model.Detail" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+
+        <a asp-action="Index" class="btn btn-warning btn-sm"><i class="fas fa-chevron-circle-left mr-2"></i>Vazgeç</a>
+        <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-check mr-2"></i>Kaydet</button>
+    </div>
+</form>
+
+
+@section JavaScript{
+    <script src="~/lib/jqueryValidate/jquery.validate.min.js"></script>
+    <script src="~/lib/jqueryUnob/jquery.validate.unobtrusive.min.js"></script>
+}

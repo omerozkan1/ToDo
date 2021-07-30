@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-3">
+
+    <div class="col-md-6">
+        <div class="card text-white bg-primary text-center  mb-3">
+
+            <div class="card-body">
+                <h4 class="card-title">Tamamladığınız Görev Sayısı</h4>
+
+                @if (ViewBag.CompletedDutyCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.CompletedDutyCount</p>
+                    <p class="">
+
+                        <a asp-action="Index" asp-controller="Duty" class="btn btn-light btn-sm"><i class="fas fa-chevron-circle-right"></i>İncele</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="card-text lead">
+                        Herhangi bir görev tamamlamamışsınız.
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-primary text-center  mb-3">
+
+            <div class="card-body">
+                <h4 class="card-title">Tamamlamanız Gereken Görev Sayısı</h4>
+
+                @if (ViewBag.ToBeCompletedDutyCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.ToBeCompletedDutyCount</p>
+                    <p class="">
+
+                        <a asp-action="Index" asp-controller="WorkOrder" class="btn btn-light btn-sm"><i class="fas fa-chevron-circle-right"></i>İncele</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="card-text lead">
+                        Herhangi bir iş emriniz bulunmamaktadır.
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-primary text-center  mb-3">
+
+            <div class="card-body">
+                <h4 class="card-title">Okumadığınız Bildirimler</h4>
+
+                @if (ViewBag.NotReadCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.NotReadCount</p>
+                    <p class="">
+
+                        <a asp-action="Index" asp-controller="Notification" class="btn btn-light btn-sm"><i class="fas fa-chevron-circle-right"></i>İncele</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="card-text lead">
+                        Bütün bildirimler okundu.
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-primary text-center mb-3">
+
+            <div class="card-body">
+                <h4 class="card-title">Yazdığınız Rapor Sayısı</h4>
+                @if (ViewBag.ReportCount > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.ReportCount</p>
+                }
+                else
+                {
+                    <p class="card-text lead">
+                        Herhangi bir rapor yazmamışsınız.
+                    </p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+

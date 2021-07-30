@@ -6,6 +6,7 @@ using OmerOzkan.ToDo.Business.StringInfos;
 using OmerOzkan.ToDo.Dto.Dtos.UrgencyDtos;
 using OmerOzkan.ToDo.Entities.Domains;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
 {
@@ -13,18 +14,17 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
     [Area(RoleInfo.Admin)]
     public class UrgenciesController : Controller
     {
-        private readonly IUrgencyService _urgencyService;
+        private readonly IGenericService<Urgency> _urgencyService;
         private readonly IMapper _mapper;
-        public UrgenciesController(IUrgencyService urgencyService, IMapper mapper)
+        public UrgenciesController(IGenericService<Urgency> urgencyService, IMapper mapper)
         {
             _mapper = mapper;
             _urgencyService = urgencyService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             TempData["Active"] = TempdataInfo.Urgency;
-
-            return View(_mapper.Map<List<UrgencyListDto>>(_urgencyService.GetAllAsync()));
+            return View(_mapper.Map<List<UrgencyListDto>>(await _urgencyService.GetAllAsync()));
         }
 
         public IActionResult Add()
@@ -34,11 +34,11 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(UrgencyAddDto model)
+        public async Task<IActionResult> Add(UrgencyAddDto model)
         {
             if (ModelState.IsValid)
             {
-                _urgencyService.AddAsync(new Urgency()
+                await _urgencyService.AddAsync(new Urgency()
                 {
                     Description = model.Description
                 });
@@ -48,18 +48,18 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
             TempData["Active"] = TempdataInfo.Urgency;
-            return View(_mapper.Map<UrgencyUpdateDto>(_urgencyService.FindByIdAsync(id)));
+            return View(_mapper.Map<UrgencyUpdateDto>(await _urgencyService.FindByIdAsync(id)));
         }
 
         [HttpPost]
-        public IActionResult Update(UrgencyUpdateDto model)
+        public async Task<IActionResult> Update(UrgencyUpdateDto model)
         {
             if (ModelState.IsValid)
             {
-                _urgencyService.UpdateAsync(new Urgency
+                await _urgencyService.UpdateAsync(new Urgency
                 {
                     Id = model.Id,
                     Description = model.Description

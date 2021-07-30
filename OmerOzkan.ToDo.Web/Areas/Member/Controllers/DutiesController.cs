@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
 {
-    [Authorize(Roles = RoleInfo.Admin)]
-    [Area(RoleInfo.Admin)]
+    [Authorize(Roles = RoleInfo.Member)]
+    [Area(RoleInfo.Member)]
     public class DutiesController : BaseIdentityController
     {
         private readonly IDutyService _dutyService;
@@ -28,18 +28,16 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
         public async Task<IActionResult> Index(int activePage = 1)
         {
             TempData["Active"] = TempdataInfo.Duty;
-            var user = await GetLoginUser();
+            var user = await GetLoggedUser();
 
             int totalPage;
 
-            var gorevler = _mapper.Map<List<DutyListDto>>(_dutyService.GetAllByIncomplete(out totalPage, user.Id.ToString(), activePage));
+            var duties = _mapper.Map<List<DutyListDto>>(_dutyService.GetAllByIncomplete(out totalPage, user.Id.ToString(), activePage));
 
             ViewBag.TotalPage = totalPage;
             ViewBag.ActivePage = activePage;
 
-            return View(gorevler);
-        }
-
-        
+            return View(duties);
+        }       
     }
 }

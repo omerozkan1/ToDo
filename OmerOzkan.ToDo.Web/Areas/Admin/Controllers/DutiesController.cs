@@ -16,13 +16,17 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
     public class DutiesController : Controller
     {
         private readonly IDutyService _dutyService;
+        private readonly IGenericService<Urgency> _genericUrgencyService;
+        private readonly IGenericService<Duty> _genericDutyService;
         private readonly IUrgencyService _urgencyService;
         private readonly IMapper _mapper;
 
-        public DutiesController(IDutyService dutyService, IUrgencyService urgencyService, IMapper mapper)
+        public DutiesController(IDutyService dutyService, IGenericService<Urgency> genericUrgencyService, IGenericService<Duty> genericDutyService, IUrgencyService urgencyService, IMapper mapper)
         {
             _mapper = mapper;
             _dutyService = dutyService;
+            _genericUrgencyService = genericUrgencyService;
+            _genericDutyService = genericDutyService;
             _urgencyService = urgencyService;
         }
 
@@ -34,7 +38,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Add()
         {
             TempData["Active"] = TempdataInfo.Duty;
-            ViewBag.Urgencies = new SelectList(await _urgencyService.GetAllAsync(), "Id", "Tanim");
+            ViewBag.Urgencies = new SelectList(await _genericUrgencyService.GetAllAsync(), "Id", "Description");
             return View(new DutyAddDto());
         }
 
@@ -43,7 +47,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _dutyService.AddAsync(new Duty
+                await _genericDutyService.AddAsync(new Duty
                 {
                     Description = model.Description,
                     Name = model.Name,
@@ -52,17 +56,16 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.Urgencies = new SelectList(await _urgencyService.GetAllAsync(), "Id", "Tanim");
+            ViewBag.Urgencies = new SelectList(await _genericUrgencyService.GetAllAsync(), "Id", "Description");
             return View(model);
         }
 
         public async Task<IActionResult> Update(int id)
         {
             TempData["Active"] = TempdataInfo.Duty;
-            var duty = _dutyService.FindByIdAsync(id);
-            ViewBag.Urgencies = new SelectList(await _urgencyService.GetAllAsync(), "Id", "Tanim", duty.Result.UrgencyId);
-            return View(
-          _mapper.Map<DutyUpdateDto>(duty));
+            var duty = await _genericDutyService.FindByIdAsync(id);
+            ViewBag.Urgencies = new SelectList(await _genericUrgencyService.GetAllAsync(), "Id", "Description", duty.UrgencyId);
+            return View(_mapper.Map<DutyUpdateDto>(duty));
         }
 
         [HttpPost]
@@ -70,7 +73,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _dutyService.UpdateAsync(new Duty()
+                await _genericDutyService.UpdateAsync(new Duty()
                 {
                     Id = model.Id,
                     Name = model.Name,
@@ -80,13 +83,13 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.Urgencies = new SelectList(await _urgencyService.GetAllAsync(), "Id", "Tanim", model.UrgencyId);
+            ViewBag.Urgencies = new SelectList(await _genericUrgencyService.GetAllAsync(), "Id", "Description", model.UrgencyId);
             return View(model);
         }
 
         public async Task<IActionResult> Remove(int id)
         {
-            await _dutyService.RemoveAsync(new Duty { Id = id });
+            await _genericDutyService.RemoveAsync(new Duty { Id = id });
             return Json(null);
         }
     }

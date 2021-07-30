@@ -17,16 +17,6 @@ namespace OmerOzkan.ToDo.Business.Concrete
             _dutyDal = dutyDal;
         }
 
-        public async Task AddAsync(Duty entity)
-        {
-           await _dutyDal.AddAsync(entity);
-        }
-
-        public async Task<Duty> FindByIdAsync(int id)
-        {
-            return await _dutyDal.FindByIdAsync(id);
-        }
-
         public List<Duty> GetAll()
         {
             return _dutyDal.GetAll();
@@ -35,11 +25,6 @@ namespace OmerOzkan.ToDo.Business.Concrete
         public List<Duty> GetAll(Expression<Func<Duty, bool>> filter)
         {
             return _dutyDal.GetAll(filter);
-        }
-
-        public Task<List<Duty>> GetAllAsync()
-        {
-            return _dutyDal.GetAllAsync();
         }
 
         public List<Duty> GetAllByIncomplete(out int totalPage, string userId, int activePage = 1)
@@ -85,16 +70,6 @@ namespace OmerOzkan.ToDo.Business.Concrete
         public int GetDutyCountToBeCompletedByAppUserId(string id)
         {
             return _dutyDal.GetDutyCountToBeCompletedByAppUserId(id);
-        }
-
-        public async Task RemoveAsync(Duty entity)
-        {
-            await _dutyDal.RemoveAsync(entity);
-        }
-
-        public async Task UpdateAsync(Duty entity)
-        {
-            await _dutyDal.UpdateAsync(entity);
         }
     }
 }

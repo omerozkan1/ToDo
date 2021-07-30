@@ -1,0 +1,111 @@
+﻿@model List<DutyListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+    int index = 0;
+}
+
+@foreach (var duty in Model)
+{
+    index++;
+    <div class="card my-1">
+        <h5 class="card-header">@duty.Name</h5>
+        <div class="card-body">
+            <h5 class="card-title"><span class="text-danger">Aciliyet Durumu :</span>@duty.Urgency.Description</h5>
+            <p class="card-text">@duty.Description</p>
+
+            <p class="text-right">
+                @if (duty.Reports.Count > 0)
+                {
+                    <a class="btn btn-light btn-sm" data-toggle="collapse" href="#collapseExample-@index" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Raporlara Git<i class="fas fa-sort-down ml-2"></i>
+                        <span class="badge badge-dark">@duty.Reports.Count</span>
+                    </a>
+                }
+                else
+                {
+                    <span class="lead font-weight-bold font-italic d-block text-left mb-1">
+                        Hiç rapor yazmamışsınız,görevinizdeki ilerlemelerinizden bahsedin.
+                    </span>
+                    <a asp-action="AddReport" asp-route-id="@duty.Id" class="btn btn-light btn-sm"><i class="fas fa-plus-circle mr-2"></i>Rapor Yaz</a>
+                }
+
+                <a href="#" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="@duty.Id">
+                    Tamamlandı olarak işaretle
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample-@index">
+                <a asp-action="AddReport" asp-route-id="@duty.Id" class="btn btn-light btn-sm"><i class="fas fa-plus-circle mr-2"></i>Rapor Yaz</a>
+                <table class="table table-hover table-bordered table-sm">
+                    <tr>
+                        <th>Ad</th>
+                        <th>Detay</th>
+                        <th>İşlem</th>
+                    </tr>
+                    @foreach (var report in duty.Reports)
+                    {
+                        <tr>
+                            <td>@report.Description</td>
+                            <td>@report.Detail</td>
+                            <td>
+                                <a asp-action="UpdateReport" asp-route-id="@duty.Id" class="btn btn-warning btn-sm"><i class="far fa-edit mr-2"></i>Düzenle</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">UYARI</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center lead">
+                Bu işlemi gerçekleştirmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button id="btnKaydet" type="button" class="btn btn-primary">Evet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section JavaScript{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#exampleModal").on("show.bs.modal", function (event) {
+                let tetikleyenElement = $(event.relatedTarget);
+                let data = tetikleyenElement.data("id");
+                $("#btnKaydet").click(function () {
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: "./WorkOrder/CompleteDuty",
+                        data: { dutyId: data },
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function (error) {
+                            alert(error.responseText);
+                        }
+                    })
+                })
+            });
+        });
+
+    </script>
+
+}
+
+

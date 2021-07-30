@@ -28,12 +28,12 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
         {
             TempData["Active"] = TempdataInfo.Home;
 
-            var user = await GetLoginUser();
+            var user = await GetLoggedUser();
 
-            ViewBag.AtanmayiBekleyenGorevSayisi = _dutyService.GetDutyCountPendingAssignment();
-            ViewBag.TamamlanmisGorevSayisi = _dutyService.GetDutyCountCompleted();
-            ViewBag.OkunmamisBildirimSayisi = _notificationService.GetNotReadCountByAppUserId(user.Id.ToString());
-            ViewBag.ToplamRaporSayisi = _reportService.GetReportCount();
+            ViewBag.PendingAssignmentDutyCount = _dutyService.GetDutyCountPendingAssignment();
+            ViewBag.CompletedDutyCount = _dutyService.GetDutyCountCompleted();
+            ViewBag.NotReadNotificationCount = _notificationService.GetNotReadCountByAppUserId(user.Id.ToString());
+            ViewBag.ReportCount = _reportService.GetReportCount();
 
             return View();
         }
