@@ -24,7 +24,7 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Fact]
-        public void GetAll_ReturnListResultWithDuty()
+        public void GetAll_MethodExecute()
         {
             _mock.Setup(x => x.GetAll()).Returns(_duties);
 
@@ -39,7 +39,7 @@ namespace OmerOzkan.ToDo.Test.Business
         [Theory]
         [InlineData("1")]
         [InlineData("2")]
-        public void GetByAppUserId_ReturnListResultWithAppUser(string appUserId)
+        public void GetByAppUserId_MethodExecute(string appUserId)
         {
             _mock.Setup(x => x.GetByAppUserId(appUserId)).Returns(_duties);
 
@@ -51,7 +51,7 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Fact]
-        public void GetByIncompleteWithUrgency_ReturnListResultWithUrgency()
+        public void GetByIncompleteWithUrgency_MethodExecute()
         {
             _mock.Setup(x => x.GetByIncompleteWithUrgency()).Returns(_duties);
 
@@ -65,7 +65,7 @@ namespace OmerOzkan.ToDo.Test.Business
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void GetByReportId_ReturnListResultWithReport(int id)
+        public void GetByReportId_MethodExecute(int id)
         {
             _mock.Setup(x => x.GetByReportId(id)).Returns(_duties.First());
 
@@ -79,7 +79,7 @@ namespace OmerOzkan.ToDo.Test.Business
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void GetByUrgencyId_ReturnListResultWithUrgency(int id)
+        public void GetByUrgencyId_MethodExecute(int id)
         {
             _mock.Setup(x => x.GetByUrgencyId(id)).Returns(_duties.First());
 
@@ -93,7 +93,7 @@ namespace OmerOzkan.ToDo.Test.Business
         [Theory]
         [InlineData("1")]
         [InlineData("2")]
-        public void GetDutyCountCompleteByAppUserId_ReturnListResultWithAppUser(string id)
+        public void GetDutyCountCompleteByAppUserId_MethodExecute(string id)
         {
             _mock.Setup(x => x.GetDutyCountCompleteByAppUserId(id)).Returns(1);
             var result = _dutyService.GetDutyCountCompleteByAppUserId(id);
@@ -103,7 +103,7 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Fact]
-        public void GetDutyCountCompleted_ReturnListResultWithDuty()
+        public void GetDutyCountCompleted_MethodExecute()
         {
             _mock.Setup(x => x.GetDutyCountCompleted()).Returns(1);
             var result = _dutyService.GetDutyCountCompleted();
@@ -112,7 +112,7 @@ namespace OmerOzkan.ToDo.Test.Business
 
 
         [Fact]
-        public void GetDutyCountPendingAssignment_ReturnListResultWithDuty()
+        public void GetDutyCountPendingAssignment_MethodExecute()
         {
             _mock.Setup(x => x.GetDutyCountPendingAssignment()).Returns(1);
             var result = _dutyService.GetDutyCountPendingAssignment();
@@ -122,7 +122,7 @@ namespace OmerOzkan.ToDo.Test.Business
         [Theory]
         [InlineData("1")]
         [InlineData("2")]
-        public void GetDutyCountToBeCompletedByAppUserId_ReturnListResultWithDuty(string id)
+        public void GetDutyCountToBeCompletedByAppUserId_MethodExecute(string id)
         {
             _mock.Setup(x => x.GetDutyCountToBeCompletedByAppUserId(id)).Returns(1);
             var result = _dutyService.GetDutyCountToBeCompletedByAppUserId(id);

@@ -9,12 +9,12 @@ using Xunit;
 
 namespace OmerOzkan.ToDo.Test.Business
 {
-    public class NotificationTest
+    public class NotificationServiceTest
     {
         private Mock<INotificationDal> _mock;
         private NotificationService _notificationService;
         private List<Notification> _notifications;
-        public NotificationTest()
+        public NotificationServiceTest()
         {
             _mock = new Mock<INotificationDal>();
             _notificationService = new NotificationService(_mock.Object);
