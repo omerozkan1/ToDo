@@ -36,7 +36,6 @@ namespace OmerOzkan.ToDo.Web.Controllers
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user != null)
                 {
-                    await _signInManager.SignOutAsync();
                     var identityResult = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (identityResult.Succeeded)
                     {
@@ -96,11 +95,6 @@ namespace OmerOzkan.ToDo.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-
         public IActionResult StatusCode(int? code)
         {
             if (code == 404)
@@ -119,11 +113,6 @@ namespace OmerOzkan.ToDo.Web.Controllers
             ViewBag.Path = exceptionHandler.Path;
             ViewBag.Message = exceptionHandler.Error.Message;
             return View();
-        }
-
-        public void Hata()
-        {
-            throw new Exception("Hata");
         }
     }
 }

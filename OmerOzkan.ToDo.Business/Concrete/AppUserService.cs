@@ -36,11 +36,6 @@ namespace OmerOzkan.ToDo.Business.Concrete
             return _appUserDal.GetMostCompleteDutyUsers();
         }
 
-        public async Task<AppUser> CheckUserAsync(AppUserLoginDto appUserLoginDto)
-        {
-            return await _genericDal.GetAsync(I => I.Email == appUserLoginDto.Email /*&& I.Password == appUserLoginDto.Password*/);
-        }
-
         public async Task<AppUser> FindByNameAsync(string userName)
         {
             return await _genericDal.GetAsync(I => I.UserName == userName);

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmerOzkan.ToDo.Business", "OmerOzkan.ToDo.Business\OmerOzkan.ToDo.Business.csproj", "{F512F1E0-7870-4D91-B2B0-76038B08656B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmerOzkan.ToDo.Business", "OmerOzkan.ToDo.Business\OmerOzkan.ToDo.Business.csproj", "{F512F1E0-7870-4D91-B2B0-76038B08656B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmerOzkan.ToDo.DataAccess", "OmerOzkan.ToDo.DataAccess\OmerOzkan.ToDo.DataAccess.csproj", "{FDF89A75-D6BE-40F5-88EB-15B8EC89831A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmerOzkan.ToDo.DataAccess", "OmerOzkan.ToDo.DataAccess\OmerOzkan.ToDo.DataAccess.csproj", "{FDF89A75-D6BE-40F5-88EB-15B8EC89831A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmerOzkan.ToDo.Web", "OmerOzkan.ToDo.Web\OmerOzkan.ToDo.Web.csproj", "{8E2AD8E2-2130-4E5B-BDCE-D6908CE0FE40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmerOzkan.ToDo.Web", "OmerOzkan.ToDo.Web\OmerOzkan.ToDo.Web.csproj", "{8E2AD8E2-2130-4E5B-BDCE-D6908CE0FE40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmerOzkan.ToDo.Dto", "OmerOzkan.ToDo.Dto\OmerOzkan.ToDo.Dto.csproj", "{4059D674-DA42-4835-8718-84D6621B69B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmerOzkan.ToDo.Dto", "OmerOzkan.ToDo.Dto\OmerOzkan.ToDo.Dto.csproj", "{4059D674-DA42-4835-8718-84D6621B69B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmerOzkan.ToDo.Entities", "OmerOzkan.ToDo.Entities\OmerOzkan.ToDo.Entities.csproj", "{B089687C-A183-4ED7-9751-526FB73EF424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmerOzkan.ToDo.Entities", "OmerOzkan.ToDo.Entities\OmerOzkan.ToDo.Entities.csproj", "{B089687C-A183-4ED7-9751-526FB73EF424}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmerOzkan.ToDo.Test", "OmerOzkan.ToDo.Test\OmerOzkan.ToDo.Test.csproj", "{C64DA65B-A4D9-4D92-AF4D-84B2B7EE97D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B089687C-A183-4ED7-9751-526FB73EF424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B089687C-A183-4ED7-9751-526FB73EF424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B089687C-A183-4ED7-9751-526FB73EF424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C64DA65B-A4D9-4D92-AF4D-84B2B7EE97D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C64DA65B-A4D9-4D92-AF4D-84B2B7EE97D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C64DA65B-A4D9-4D92-AF4D-84B2B7EE97D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C64DA65B-A4D9-4D92-AF4D-84B2B7EE97D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
