@@ -22,7 +22,7 @@ namespace OmerOzkan.ToDo.Web.Extensions
                 var context = serviceScope.ServiceProvider.GetService<ToDoContext>();
                 if (context != null && context.Database != null)
                 {
-                    context.Database.MigrateAsync();
+                    context.Database.Migrate();
                 }
             }
         }

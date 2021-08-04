@@ -26,7 +26,7 @@ namespace OmerOzkan.ToDo.Web
             services.AddDependencies();
             services.AddDbContext<ToDoContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionString"], x => x.MigrationsAssembly("OmerOzkan.ToDo.DataAccess"));
+                options.UseSqlServer(Configuration["ConnectionString"]);
             });
 
             services.AddCustomIdentity();
@@ -39,7 +39,8 @@ namespace OmerOzkan.ToDo.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ToDoContext context)
         {
-            app.UseUpgradeDatabase();
+            UpdateDatabase(app);
+            IdentityInitializer.SeedData(context).Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -53,8 +54,9 @@ namespace OmerOzkan.ToDo.Web
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();
+
             app.UseAuthorization();
-            IdentityInitializer.SeedData(context).Wait();
+     
 
             app.UseEndpoints(endpoints =>
             {
@@ -67,6 +69,19 @@ namespace OmerOzkan.ToDo.Web
                   name: "default",
                   pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ToDoContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

@@ -15,11 +15,11 @@ namespace OmerOzkan.ToDo.DataAccess.Concrete.EfCore.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new AppUserMap());
-            builder.ApplyConfiguration(new DutyMap());
-            builder.ApplyConfiguration(new NotificationMap());
-            builder.ApplyConfiguration(new ReportMap());
-            builder.ApplyConfiguration(new UrgencyMap());
+            //builder.ApplyConfiguration(new AppUserMap());
+            //builder.ApplyConfiguration(new DutyMap());
+            //builder.ApplyConfiguration(new NotificationMap());
+            //builder.ApplyConfiguration(new ReportMap());
+            //builder.ApplyConfiguration(new UrgencyMap());
 
             base.OnModelCreating(builder);
         }

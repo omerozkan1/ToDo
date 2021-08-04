@@ -29,7 +29,7 @@ namespace OmerOzkan.ToDo.Web
                 NormalizedName = "MEMBER"
             };
 
-            if (!context.Roles.Any(x=> x.Name == "Member"))
+            if (!context.Roles.Any(x => x.Name == "Member"))
             {
                 await context.Roles.AddAsync(role);
             }

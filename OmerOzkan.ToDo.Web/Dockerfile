@@ -7,7 +7,6 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["OmerOzkan.ToDo.Web/OmerOzkan.ToDo.Web.csproj", "OmerOzkan.ToDo.Web/"]
-COPY ["OmerOzkan.ToDo.Web/OmerOzkan.ToDo.Test.csproj", "OmerOzkan.ToDo.Web/OmerOzkan.ToDo.Test/"]
 COPY ["OmerOzkan.ToDo.Business/OmerOzkan.ToDo.Business.csproj", "OmerOzkan.ToDo.Business/"]
 COPY ["OmerOzkan.ToDo.DataAccess/OmerOzkan.ToDo.DataAccess.csproj", "OmerOzkan.ToDo.DataAccess/"]
 COPY ["OmerOzkan.ToDo.Entities/OmerOzkan.ToDo.Entities.csproj", "OmerOzkan.ToDo.Entities/"]
