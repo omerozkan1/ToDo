@@ -44,3 +44,20 @@ Staff can set the assigned job as completed.
 ![Screenshot_8](https://user-images.githubusercontent.com/51949407/128131315-60f4fda7-9d2c-4bf1-9fbd-0a083a22adb0.png)
 ![Screenshot_10](https://user-images.githubusercontent.com/51949407/128131357-d550008c-2764-4201-8cc8-aa5b241e7aa3.png)
 
+
+SignUp & Login
+
+![signup](https://user-images.githubusercontent.com/51949407/128142464-c0c793ce-f64e-4628-9bd3-1ec33b4dc282.png)
+
+![login](https://user-images.githubusercontent.com/51949407/128142485-43238bc7-f1b9-4d3f-967a-e2dfb8736264.png)
+
+
+Test Scenario
+
+![Screenshot_12](https://user-images.githubusercontent.com/51949407/128142396-8536c0ff-cf04-4e23-a5ae-997cd5027f5c.png)
+
+
+
+
+
+
