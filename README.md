@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
 </head>
 
@@ -21,6 +22,8 @@
 <h1 id="used-technologies">Used Technologies</h1>
 <p>.Net 5<br>
 MVC<br>
+Docker<br>
+xUnit<br>
 Identity Server<br>
 MSSQL<br>
 Entity Framework Core<br>
