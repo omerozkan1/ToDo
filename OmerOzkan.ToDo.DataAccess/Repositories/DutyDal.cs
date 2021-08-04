@@ -19,17 +19,17 @@ namespace OmerOzkan.ToDo.DataAccess.Repositories
 
         public List<Duty> GetAll()
         {
-            return _context.Duties.Include(I => I.Urgency).Include(I => I.Reports).Include(I => I.AppUser).Where(I => !I.Status).OrderByDescending(I => I.CreatedDate).ToList();
+            return _context.Duties.Include(I => I.Urgency).Include(I => I.Reports).Where(I => !I.Status).OrderByDescending(I => I.CreatedDate).ToList();
         }
 
         public List<Duty> GetAll(Expression<Func<Duty, bool>> filter)
         {
-            return _context.Duties.Include(I => I.Urgency).Include(I => I.Reports).Include(I => I.AppUser).Where(filter).OrderByDescending(I => I.CreatedDate).ToList();
+            return _context.Duties.Include(I => I.Urgency).Include(I => I.Reports).Where(filter).OrderByDescending(I => I.CreatedDate).ToList();
         }
 
         public List<Duty> GetAllByIncomplete(out int totalPage, string userId, int activePage = 1)
         {
-            var returnValue = _context.Duties.Include(I => I.Urgency).Include(I => I.Reports).Include(I => I.AppUser).Where(I => I.AppUserId == userId && I.Status).OrderByDescending(I => I.CreatedDate);
+            var returnValue = _context.Duties.Include(I => I.Urgency).Include(I => I.Reports).Where(I => I.AppUserId == userId && I.Status).OrderByDescending(I => I.CreatedDate);
 
             totalPage = (int)Math.Ceiling((double)returnValue.Count() / 3);
             return returnValue.Skip((activePage - 1) * 3).Take(3).ToList();
@@ -47,7 +47,7 @@ namespace OmerOzkan.ToDo.DataAccess.Repositories
 
         public Duty GetByReportId(int id)
         {
-            return _context.Duties.Include(I => I.Reports).Include(I => I.AppUser).Where(I => I.Id == id).FirstOrDefault();
+            return _context.Duties.Include(I => I.Reports).Where(I => I.Id == id).FirstOrDefault();
         }
 
         public Duty GetByUrgencyId(int id)

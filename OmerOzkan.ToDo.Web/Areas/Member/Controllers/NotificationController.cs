@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OmerOzkan.ToDo.Business.Interfaces;
 using OmerOzkan.ToDo.Business.StringInfos;
@@ -16,10 +15,10 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
     [Area(RoleInfo.Member)]
     public class NotificationController : BaseIdentityController
     {
-        private readonly INotificationService _notificationService;
         private readonly IGenericService<Notification> _genericNotificationService;
+        private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
-        public NotificationController(INotificationService notificationService, IGenericService<Notification> genericNotificationService, UserManager<AppUser> userManager, IMapper mapper) : base(userManager)
+        public NotificationController(INotificationService notificationService, IGenericService<Notification> genericNotificationService, IMapper mapper, IAppUserService appUserService) : base(appUserService)
         {
             _mapper = mapper;
             _notificationService = notificationService;

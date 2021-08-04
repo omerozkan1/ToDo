@@ -51,7 +51,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
             foreach (var duty in result)
             {
                 ViewBag.Urgencies = new SelectList(await _urgencyService.GetAllAsync(), "Id", "Description", duty.UrgencyId);
-                duty.AppUser = _mapper.Map<AppUser>(_userManager.Users.FirstOrDefault(I => I.Id == Convert.ToInt32(duty.AppUserId)));                
+                ViewBag.AppUser = _mapper.Map<AppUserDto>(_userManager.Users.FirstOrDefault(I => I.Id == Convert.ToInt32(duty.AppUserId)));
             }
             return View(_mapper.Map<List<DutyListDto>>(result));
         }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OmerOzkan.ToDo.Business.Interfaces;
@@ -7,7 +6,6 @@ using OmerOzkan.ToDo.Business.StringInfos;
 using OmerOzkan.ToDo.Dto.Dtos.AppUserDtos;
 using OmerOzkan.ToDo.Entities.Domains;
 using OmerOzkan.ToDo.Web.BaseControllers;
-using System;
 using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web.Controllers
@@ -15,11 +13,13 @@ namespace OmerOzkan.ToDo.Web.Controllers
     public class HomeController : BaseIdentityController
     {
         private SignInManager<AppUser> _signInManager;
+        private UserManager<AppUser> _userManager;
         private readonly ICustomLogger _customLogger;
   
-        public HomeController(ICustomLogger customLogger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(userManager)
+        public HomeController(IAppUserService appUserService, ICustomLogger customLogger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(appUserService)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _customLogger = customLogger;        
         }
 
@@ -94,7 +94,6 @@ namespace OmerOzkan.ToDo.Web.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
         public IActionResult StatusCode(int? code)
         {
             if (code == 404)
@@ -104,7 +103,6 @@ namespace OmerOzkan.ToDo.Web.Controllers
             }
             return View();
         }
-
         public IActionResult Error()
         {
             var exceptionHandler = HttpContext.Features.Get<IExceptionHandlerPathFeature>();

@@ -1,14 +1,12 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OmerOzkan.ToDo.Business.Containers.MicrosoftIoC;
 using OmerOzkan.ToDo.DataAccess.Concrete.EfCore.Context;
-using OmerOzkan.ToDo.Entities.Domains;
 using OmerOzkan.ToDo.Web.Extensions;
 
 namespace OmerOzkan.ToDo.Web
@@ -28,7 +26,7 @@ namespace OmerOzkan.ToDo.Web
             services.AddDependencies();
             services.AddDbContext<ToDoContext>(options =>
             {
-                options.UseSqlServer("Server=DESKTOP-9TOE094;Database=ToDoDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+                options.UseSqlServer(Configuration["ConnectionString"], x => x.MigrationsAssembly("OmerOzkan.ToDo.DataAccess"));
             });
 
             services.AddCustomIdentity();
@@ -39,8 +37,9 @@ namespace OmerOzkan.ToDo.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager*/)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ToDoContext context)
         {
+            app.UseUpgradeDatabase();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -50,15 +49,12 @@ namespace OmerOzkan.ToDo.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
-
             app.UseStatusCodePagesWithReExecute("/Home/StatusCode", "?code={0}");
-
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
-
-            //IdentityInitializer.SeedData(userManager, roleManager).Wait();
+            IdentityInitializer.SeedData(context).Wait();
 
             app.UseEndpoints(endpoints =>
             {

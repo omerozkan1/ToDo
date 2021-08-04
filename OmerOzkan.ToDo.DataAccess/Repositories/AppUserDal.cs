@@ -75,7 +75,7 @@ namespace OmerOzkan.ToDo.DataAccess.Repositories
 
         public List<AppUserDutyInfo> GetMostCompleteDutyUsers()
         {
-            return _context.Duties.Include(I => I.AppUser).Where(I => I.Status).GroupBy(I => I.AppUser.UserName).OrderByDescending(I => I.Count()).Take(5).Select(I => new AppUserDutyInfo
+            return _context.Duties.Where(I => I.Status).GroupBy(I => I.AppUserId).OrderByDescending(I => I.Count()).Take(5).Select(I => new AppUserDutyInfo
             {
                 Name = I.Key,
                 DutyCount = I.Count()
@@ -84,7 +84,7 @@ namespace OmerOzkan.ToDo.DataAccess.Repositories
 
         public List<AppUserDutyInfo> GetMostEmployedUsers()
         {
-            return _context.Duties.Include(I => I.AppUser).Where(I => !I.Status && I.AppUserId != null).GroupBy(I => I.AppUser.UserName).OrderByDescending(I => I.Count()).Take(5).Select(I => new AppUserDutyInfo
+            return _context.Duties.Where(I => !I.Status && I.AppUserId != null).GroupBy(I => I.AppUserId).OrderByDescending(I => I.Count()).Take(5).Select(I => new AppUserDutyInfo
             {
                 Name = I.Key,
                 DutyCount = I.Count()

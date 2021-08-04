@@ -14,11 +14,13 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
     public class HomeController : BaseIdentityController
     {
         private readonly IReportService _reportService;
+        private UserManager<AppUser> _userManager;
         private readonly IDutyService _dutyService;
         private readonly INotificationService _notificationService;
-        public HomeController(IReportService reportService, UserManager<AppUser> userManager, IDutyService dutyService, INotificationService notificationService) : base(userManager)
+        public HomeController(IReportService reportService, UserManager<AppUser> userManager, IDutyService dutyService, INotificationService notificationService, IAppUserService appUserService) : base(appUserService)
         {
             _reportService = reportService;
+            _userManager = userManager;
             _dutyService = dutyService;
             _notificationService = notificationService;
         }

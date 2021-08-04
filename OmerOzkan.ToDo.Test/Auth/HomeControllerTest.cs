@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using OmerOzkan.ToDo.Business.Concrete;
 using OmerOzkan.ToDo.Business.Interfaces;
 using OmerOzkan.ToDo.Business.StringInfos;
 using OmerOzkan.ToDo.Dto.Dtos.AppUserDtos;
@@ -17,18 +17,19 @@ namespace OmerOzkan.ToDo.Test
     {
         private Mock<SignInManager<AppUser>> _signInManagerMock;
         private Mock<UserManager<AppUser>> _userManagerMock;
+        private Mock<AppUserService> _appUserMock;
         private Mock<ICustomLogger> _customLoggerMock;
         private HomeController _homeController;
         private List<AppUserLoginDto> _appUserLogin;
         private List<AppUserSignUpDto> _appUserSignUp;
-        private readonly IDataProtectionProvider _dataProtectionProvider;
-        public HomeControllerTest(IDataProtectionProvider dataProtectionProvider)
+
+        public HomeControllerTest()
         {
-            _dataProtectionProvider = dataProtectionProvider;
             _signInManagerMock = new Mock<SignInManager<AppUser>>();
             _userManagerMock = new Mock<UserManager<AppUser>>();
             _customLoggerMock = new Mock<ICustomLogger>();
-            _homeController = new HomeController(_customLoggerMock.Object, _userManagerMock.Object, _signInManagerMock.Object);
+            _appUserMock = new Mock<AppUserService>();
+            _homeController = new HomeController(_appUserMock.Object, _customLoggerMock.Object, _userManagerMock.Object,_signInManagerMock.Object);
 
             _appUserLogin = new List<AppUserLoginDto>() { new AppUserLoginDto { Email = "omeerozkan52@gmail.com",Password = "Test",RememberMe = true },
                                                       new AppUserLoginDto{ Email = "ugurozkan@gmail.com",Password = "Test2",RememberMe = false }};
@@ -38,34 +39,7 @@ namespace OmerOzkan.ToDo.Test
         }
 
         [Fact]
-        public void Index_ActionExecutes_ReturnView()
-        {
-            var result = _homeController.Index();
-            Assert.IsType<ViewResult>(result);
-        }
-
-        [Fact]
-        public async void Login_InValidModelState_ReturnView()
-        {
-            _homeController.ModelState.AddModelError("Email", "Email alanı gereklidir.");
-
-            var result = await _homeController.Login(_appUserLogin.First());
-            var viewResult = Assert.IsType<ViewResult>(result);
-
-            Assert.IsType<AppUserLoginDto>(viewResult.Model);
-        }
-
-        [Fact]
-        public async void Login_ValidModelState_ReturnRedirectToIndexAction()
-        {
-            var result = await _homeController.Login(_appUserLogin.First());
-            var redirect = Assert.IsType<RedirectToActionResult>(result);
-
-            Assert.Equal("Index", redirect.ActionName);
-        }
-
-        [Fact]
-        public async void Login_ValidModelState_FindByEmailAsyncMethodExecute()
+        public async void Login_FindByEmailAsyncMethodExecute()
         {
             AppUser appUser = null;
             _userManagerMock.Setup(repo => repo.FindByEmailAsync(_appUserLogin.First().Email)).Callback<AppUser>(x => appUser = x);
@@ -77,7 +51,7 @@ namespace OmerOzkan.ToDo.Test
         }
 
         [Fact]
-        public async void Login_ValidModelState_PasswordSignInAsyncMethodExecute()
+        public async void Login_PasswordSignInAsyncMethodExecute()
         {
             AppUser appUser = null;
 
@@ -87,7 +61,6 @@ namespace OmerOzkan.ToDo.Test
 
             _signInManagerMock.Verify(repo => repo.PasswordSignInAsync(appUser, _appUserLogin.First().Password, _appUserLogin.First().RememberMe, false), Times.Once);
             Assert.Equal(_appUserLogin.First().Email, appUser.Email);
-            Assert.Equal(_appUserLogin.First().Password, _dataProtectionProvider.CreateProtector(appUser.PasswordHash).Unprotect(appUser.PasswordHash));
         }
 
         [Fact]
@@ -101,14 +74,6 @@ namespace OmerOzkan.ToDo.Test
             var result = await _homeController.Login(_appUserLogin.First());
             _signInManagerMock.Verify(repo => repo.PasswordSignInAsync(appUser, _appUserLogin.First().Password, _appUserLogin.First().RememberMe, false), Times.Never);
         }
-
-        [Fact]
-        public void SignUp_ActionExecutes_ReturnView()
-        {
-            var result = _homeController.SignUp();
-            Assert.IsType<ViewResult>(result);
-        }
-
 
         [Fact]
         public async void SignUp_InValidModelState_ReturnView()
@@ -146,8 +111,6 @@ namespace OmerOzkan.ToDo.Test
             Assert.Equal(_appUserSignUp.First().Surname, appUser.SurName);
             Assert.Equal(_appUserSignUp.First().Email, appUser.Email);
             Assert.Equal(_appUserSignUp.First().UserName, appUser.UserName);
-            Assert.Equal(_appUserSignUp.First().Password, _dataProtectionProvider.CreateProtector(appUser.PasswordHash).Unprotect(appUser.PasswordHash));
-            Assert.Equal(_appUserSignUp.First().ConfirmPassword, _dataProtectionProvider.CreateProtector(appUser.PasswordHash).Unprotect(appUser.PasswordHash));
         }
 
 
@@ -178,15 +141,5 @@ namespace OmerOzkan.ToDo.Test
             var result = await _homeController.Logout();
             _signInManagerMock.Verify(repo => repo.SignOutAsync(), Times.Once);
         }
-
-        [Theory]
-        [InlineData(-1)]
-        [InlineData(404)]
-        public void StatusCode_ValidId_ReturnView(int? statusCode)
-        {
-            var result = _homeController.StatusCode(statusCode);
-            Assert.IsType<ViewResult>(result);
-        }
-
     }
 }

@@ -55,8 +55,6 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Theory]
-        [InlineData(-1)]
-        [InlineData(0)]
         [InlineData(1)]
         public async void FindByIdAsync_DutyMethodExecute(int id)
         {
@@ -76,7 +74,7 @@ namespace OmerOzkan.ToDo.Test.Business
 
             var result = await _dutyService.GetAllAsync();
 
-            Assert.Equal<int>(2, result.ToList().Count);
+            Assert.Equal(_duties, result);
         }
 
         [Fact]
@@ -126,8 +124,6 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Theory]
-        [InlineData(-1)]
-        [InlineData(0)]
         [InlineData(1)]
         public async void FindByIdAsync_UrgencyMethodExecute(int id)
         {
@@ -147,7 +143,7 @@ namespace OmerOzkan.ToDo.Test.Business
 
             var result = await _urgencyService.GetAllAsync();
 
-            Assert.Equal<int>(2, result.ToList().Count);
+            Assert.Equal(_urgencies, result);
         }
 
         [Fact]
@@ -168,7 +164,7 @@ namespace OmerOzkan.ToDo.Test.Business
             Urgency urgency = null;
             _urgencyMock.Setup(repo => repo.UpdateAsync(It.IsAny<Urgency>())).Callback<Urgency>(x => urgency = x);
 
-            await _dutyService.UpdateAsync(_duties.First());
+            await _urgencyService.UpdateAsync(_urgencies.First());
 
             _urgencyMock.Verify(repo => repo.UpdateAsync(It.IsAny<Urgency>()), Times.Once);
             Assert.Equal(_urgencies.First().Id, urgency.Id);
@@ -196,8 +192,6 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Theory]
-        [InlineData(-1)]
-        [InlineData(0)]
         [InlineData(1)]
         public async void FindByIdAsync_NotificationMethodExecute(int id)
         {
@@ -217,7 +211,7 @@ namespace OmerOzkan.ToDo.Test.Business
 
             var result = await _notificationService.GetAllAsync();
 
-            Assert.Equal<int>(2, result.ToList().Count);
+            Assert.Equal(_notifications, result);
         }
 
         [Fact]
@@ -266,8 +260,6 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Theory]
-        [InlineData(-1)]
-        [InlineData(0)]
         [InlineData(1)]
         public async void FindByIdAsync_ReportMethodExecute(int id)
         {
@@ -287,7 +279,7 @@ namespace OmerOzkan.ToDo.Test.Business
 
             var result = await _reportService.GetAllAsync();
 
-            Assert.Equal<int>(2, result.ToList().Count);
+            Assert.Equal(_reports, result);
         }
 
         [Fact]

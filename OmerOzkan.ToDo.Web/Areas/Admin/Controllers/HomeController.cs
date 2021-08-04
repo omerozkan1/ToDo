@@ -16,12 +16,14 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
         private readonly IDutyService _dutyService;
         private readonly INotificationService _notificationService;
         private readonly IReportService _reportService;
+        private UserManager<AppUser> _userManager;
 
-        public HomeController(IDutyService dutyService, INotificationService notificationService, IReportService reportService, UserManager<AppUser> userManager) : base(userManager)
+        public HomeController(IDutyService dutyService, INotificationService notificationService, IReportService reportService, UserManager<AppUser> userManager, IAppUserService appUserService) : base(appUserService)
         {
             _dutyService = dutyService;
             _notificationService = notificationService;
             _reportService = reportService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -32,7 +34,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
 
             ViewBag.PendingAssignmentDutyCount = _dutyService.GetDutyCountPendingAssignment();
             ViewBag.CompletedDutyCount = _dutyService.GetDutyCountCompleted();
-            ViewBag.NotReadNotificationCount = _notificationService.GetNotReadCountByAppUserId(user.Id.ToString());
+            ViewBag.NotReadNotificationCount = _notificationService.GetNotReadCountByAppUserId(user != null ? user.Id.ToString() : "");
             ViewBag.ReportCount = _reportService.GetReportCount();
 
             return View();

@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  mssqldb:
+    environment:   
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=admin.123  
+    ports:
+      - "1433:1433"
+
+  todo.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionString=Server=mssqldb; Database=ToDoDb; User=sa; Password=admin.123"
+    ports:
+      - "5002:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    depends_on: 
+      - mssqldb
+
+

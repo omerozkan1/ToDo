@@ -20,7 +20,6 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Theory]
-        [InlineData(0)]
         [InlineData(1)]
         public void GetByReportId_MethodExecute(int id)
         {
@@ -43,10 +42,7 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Theory]
-        [InlineData("0")]
         [InlineData("1")]
-        [InlineData("2")]
-        [InlineData("3")]
         public void GetReportCountByAppUserId_MethodExecute(string id)
         {
             _mock.Setup(x => x.GetReportCountByAppUserId(id)).Returns(1);

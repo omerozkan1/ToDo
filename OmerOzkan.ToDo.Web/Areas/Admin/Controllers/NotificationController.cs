@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OmerOzkan.ToDo.Business.Interfaces;
 using OmerOzkan.ToDo.Business.StringInfos;
 using OmerOzkan.ToDo.Dto.Dtos.NotificationDtos;
 using OmerOzkan.ToDo.Entities.Domains;
+using OmerOzkan.ToDo.Web.BaseControllers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,24 +13,22 @@ namespace OmerOzkan.ToDo.Web.Areas.Admin.Controllers
 {
     [Authorize(Roles = RoleInfo.Admin)]
     [Area(RoleInfo.Admin)]
-    public class NotificationController : Controller
+    public class NotificationController : BaseIdentityController
     {
         private readonly IGenericService<Notification> _genericNotificationService;
         private readonly INotificationService _notificationService;
-        private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
-        public NotificationController(IGenericService<Notification> genericNotificationService, INotificationService notificationService, UserManager<AppUser> userManager, IMapper mapper)
+        public NotificationController(INotificationService notificationService, IGenericService<Notification> genericNotificationService, IMapper mapper, IAppUserService appUserService) : base(appUserService)
         {
             _mapper = mapper;
-            _genericNotificationService = genericNotificationService;
             _notificationService = notificationService;
-            _userManager = userManager;
+            _genericNotificationService = genericNotificationService;
         }
 
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = TempdataInfo.Notification;
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await GetLoggedUser();
             return View(_mapper.Map<List<NotificationListDto>>(_notificationService.GetNotReadUsers(user.Id.ToString())));
         }
 

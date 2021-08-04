@@ -23,31 +23,26 @@ namespace OmerOzkan.ToDo.Test.Business
         }
 
         [Theory]
-        [InlineData("3")]
-        [InlineData("4")]
+        [InlineData("1")]
         public void GetNotReadUsers_MethodExecute(string appUserId)
         {
             _mock.Setup(x => x.GetNotReadUsers(appUserId)).Returns(_notifications);
 
             var result = _notificationService.GetNotReadUsers(appUserId);
-            var returnValue = Assert.IsType<Notification>(result);
+            var returnValue = Assert.IsType<List<Notification>>(result);
 
-            Assert.Equal(appUserId, returnValue.AppUserId);
-            Assert.Equal(_notifications.First().Description, returnValue.Description);
+            Assert.Equal(appUserId, returnValue.First().AppUserId);
+            Assert.Equal(_notifications.First().Description, returnValue.First().Description);
         }
 
 
         [Theory]
-        [InlineData("3")]
-        [InlineData("4")]
+        [InlineData("1")]
         public void GetNotReadCountByAppUserId_MethodExecute(string appUserId)
         {
-            _mock.Setup(x => x.GetNotReadCountByAppUserId(appUserId)).Returns(2);
-
-            var result = _notificationService.GetNotReadUsers(appUserId);
-            var returnValue = Assert.IsType<List<Notification>>(result);
-
-            Assert.Equal<int>(2, returnValue.ToList().Count);
+            _mock.Setup(x => x.GetNotReadCountByAppUserId(appUserId)).Returns(1);
+            var result = _notificationService.GetNotReadCountByAppUserId(appUserId);
+            Assert.Equal(1, result);
         }
     }
 }

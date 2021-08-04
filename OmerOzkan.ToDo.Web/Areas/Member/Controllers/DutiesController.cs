@@ -18,10 +18,12 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
     {
         private readonly IDutyService _dutyService;
         private readonly IMapper _mapper;
+        private UserManager<AppUser> _userManager;
 
-        public DutiesController(IDutyService dutyService, IMapper mapper, UserManager<AppUser> userManager) : base(userManager)
+        public DutiesController(IDutyService dutyService, IMapper mapper, UserManager<AppUser> userManager, IAppUserService appUserService) : base(appUserService)
         {
             _mapper = mapper;
+            _userManager = userManager;
             _dutyService = dutyService;
         }
 

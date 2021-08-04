@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  mssqldb:
+    image: mcr.microsoft.com/mssql/server
+
+  todo.web:
+    image: ${DOCKER_REGISTRY-}todoweb
+    build:
+      context: .
+      dockerfile: OmerOzkan.ToDo.Web/Dockerfile
+
+

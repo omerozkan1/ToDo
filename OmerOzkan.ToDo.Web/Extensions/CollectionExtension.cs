@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OmerOzkan.ToDo.Business.ValidationRules.FluentValidation;
 using OmerOzkan.ToDo.DataAccess.Concrete.EfCore.Context;
@@ -13,6 +15,18 @@ namespace OmerOzkan.ToDo.Web.Extensions
 {
     public static class CollectionExtension
     {
+        public static void UseUpgradeDatabase(this IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<ToDoContext>();
+                if (context != null && context.Database != null)
+                {
+                    context.Database.MigrateAsync();
+                }
+            }
+        }
+
         public static void AddCustomIdentity(this IServiceCollection services)
         {
             services.AddIdentity<AppUser, AppRole>(opt =>
@@ -47,5 +61,16 @@ namespace OmerOzkan.ToDo.Web.Extensions
             services.AddTransient<IValidator<ReportAddDto>, ReportAddValidator>();
             services.AddTransient<IValidator<ReportUpdateDto>, ReportUpdateValidator>();
         }
+
+        //public static void UseUpdateDatabase(this IApplicationBuilder app)
+        //{
+        //    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        //    {
+        //        using (var context = serviceScope.ServiceProvider.GetService<ToDoContext>())
+        //        {
+        //            context.Database.Migrate();
+        //        }
+        //    }
+        //}
     }
 }

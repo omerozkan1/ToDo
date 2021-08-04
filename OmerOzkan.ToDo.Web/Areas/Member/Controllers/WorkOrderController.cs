@@ -17,6 +17,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
     [Area(RoleInfo.Member)]
     public class WorkOrderController : BaseIdentityController
     {
+        private UserManager<AppUser> _userManager;
         private readonly IReportService _reportService;
         private readonly IDutyService _dutyService;
         private readonly INotificationService _notificationService;
@@ -24,7 +25,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
         private readonly IGenericService<Notification> _genericNotificationService;
         private readonly IGenericService<Report> _genericReportService;
         private readonly IMapper _mapper;
-        public WorkOrderController(IReportService reportService, UserManager<AppUser> userManager, IDutyService dutyService, INotificationService notificationService, IGenericService<Duty> genericDutyService, IGenericService<Notification> genericNotificationService, IGenericService<Report> genericReportService, IMapper mapper) : base(userManager)
+        public WorkOrderController(IReportService reportService, UserManager<AppUser> userManager, IDutyService dutyService, INotificationService notificationService, IGenericService<Duty> genericDutyService, IGenericService<Notification> genericNotificationService, IGenericService<Report> genericReportService, IMapper mapper, IAppUserService appUserService) : base(appUserService)
         {
             _reportService = reportService;
             _dutyService = dutyService;
@@ -32,6 +33,7 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
             _genericDutyService = genericDutyService;
             _genericNotificationService = genericNotificationService;
             _genericReportService = genericReportService;
+            _userManager = userManager;
             _mapper = mapper;
         }
 

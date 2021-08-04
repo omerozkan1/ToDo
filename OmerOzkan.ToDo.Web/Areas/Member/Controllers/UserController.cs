@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OmerOzkan.ToDo.Business.Interfaces;
 using OmerOzkan.ToDo.Business.StringInfos;
 using OmerOzkan.ToDo.Dto.Dtos.AppUserDtos;
 using OmerOzkan.ToDo.Entities.Domains;
@@ -19,9 +20,11 @@ namespace OmerOzkan.ToDo.Web.Areas.Member.Controllers
     public class UserController : BaseIdentityController
     {
         private readonly IMapper _mapper;
-        public UserController(UserManager<AppUser> userManager, IMapper mapper) : base(userManager)
+        private UserManager<AppUser> _userManager;
+        public UserController(UserManager<AppUser> userManager, IMapper mapper, IAppUserService appUserService) : base(appUserService)
         {
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
