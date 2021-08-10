@@ -16,7 +16,7 @@
 <pre><code>docker-compose up --build
 </code></pre>
 <p>For application you should run the following command line</p>
-<pre><code>Asp.NET Core MVC http://localhost:5002/
+<pre><code>http://localhost:5002/
 </code></pre>
 <h1 id="used-technologies">Used Technologies</h1>
 <p>.Net 5<br>
