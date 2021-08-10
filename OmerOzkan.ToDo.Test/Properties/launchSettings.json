@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OmerOzkan.ToDo.Test": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

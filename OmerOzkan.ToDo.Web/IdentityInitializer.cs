@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace OmerOzkan.ToDo.Web
 {
-    public static class IdentityInitializer
+    public class IdentityInitializer
     {
         public static async Task SeedData(ToDoContext context)
-        {        
+        {
             AppUser user = new AppUser
             {
                 Name = "demouser",
@@ -32,6 +32,7 @@ namespace OmerOzkan.ToDo.Web
             if (!context.Roles.Any(x => x.Name == "Member"))
             {
                 await context.Roles.AddAsync(role);
+                await context.SaveChangesAsync();
             }
 
             if (!context.Users.Any(x => x.Name == "demouser"))

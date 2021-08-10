@@ -10,4 +10,9 @@ services:
       context: .
       dockerfile: OmerOzkan.ToDo.Web/Dockerfile
 
+  todo.test:
+    image: ${DOCKER_REGISTRY-}todotest
+    build:
+      context: .
+      dockerfile: OmerOzkan.ToDo.Test/Dockerfile
 

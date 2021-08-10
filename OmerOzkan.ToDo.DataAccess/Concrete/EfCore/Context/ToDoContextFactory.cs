@@ -12,7 +12,7 @@ namespace OmerOzkan.ToDo.DataAccess.Concrete.EfCore.Context
             var config = new ConfigurationBuilder().SetBasePath(Path.Combine(Directory.GetCurrentDirectory())).AddJsonFile("appsettings.json").AddEnvironmentVariables().Build();
             var optionsBuilder = new DbContextOptionsBuilder<ToDoContext>();
 
-            optionsBuilder.UseSqlServer(config["ConnectionString"]/*, x=> x.MigrationsAssembly("OmerOzkan.ToDo.DataAccess")*/);
+            optionsBuilder.UseSqlServer(config["ConnectionString"]);
 
             return new ToDoContext(optionsBuilder.Options);
         }

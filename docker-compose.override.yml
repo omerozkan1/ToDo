@@ -19,4 +19,6 @@ services:
     depends_on: 
       - mssqldb
 
-
+  todo.test:
+    depends_on:
+      - mssqldb
